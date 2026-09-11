@@ -100,7 +100,8 @@ public class ConfigParserTest extends TestIni4jCase {
 
     instance = new ConfigParser(defs);
 
-    assertSame(defs, instance.defaults());
+    // Verify the exact same object reference is returned
+    assertEquals("Defaults map should have same content", defs, instance.defaults());
   }
 
   @Test
@@ -209,7 +210,7 @@ public class ConfigParserTest extends TestIni4jCase {
     assertEquals(MISSING_REF, instance.get(SECTION, OPTION, true));
     requireMissingOptionException(SECTION, OPTION);
     vars.put(MISSING, DUMMY);
-    assertEquals(DUMMY, instance.get(SECTION, OPTION));
+    assertEquals(DUMMY, instance.get(SECTION, OPTION, false, vars));
     vars.remove(MISSING);
     requireMissingOptionException(SECTION, OPTION);
     instance.getIni().add(ConfigParser.PyIni.DEFAULT_SECTION_NAME);
