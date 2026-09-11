@@ -107,13 +107,13 @@ public class ConfigParser implements Serializable {
   @SuppressWarnings(Warnings.UNCHECKED)
   public String get(String section, String option)
       throws NoSectionException, NoOptionException, InterpolationException {
-    return get(section, option, false, Collections.EMPTY_MAP);
+    return get(section, option, false, _ini.getDefaults());
   }
 
   @SuppressWarnings(Warnings.UNCHECKED)
   public String get(String section, String option, boolean raw)
       throws NoSectionException, NoOptionException, InterpolationException {
-    return get(section, option, raw, Collections.EMPTY_MAP);
+    return get(section, option, raw, _ini.getDefaults());
   }
 
   public String get(
@@ -372,7 +372,7 @@ public class ConfigParser implements Serializable {
     private Ini.Section _defaultSection;
 
     public PyIni(Map<String, String> defaults) {
-      _defaults = defaults;
+      _defaults = new HashMap<String, String>(defaults); // ← Create a defensive copy
       Config cfg = getConfig().clone();
 
       cfg.setEscape(false);
