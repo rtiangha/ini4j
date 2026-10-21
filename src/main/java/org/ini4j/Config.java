@@ -20,10 +20,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings("PMD.ExcessivePublicCount")
-@edu.umd.cs.findbugs.annotations.SuppressFBWarnings({
-  "SING_SINGLETON_IMPLEMENTS_CLONEABLE",
-  "SING_SINGLETON_IMPLEMENTS_SERIALIZABLE"
-})
 public class Config implements Cloneable, Serializable {
   public static final String KEY_PREFIX = "org.ini4j.config.";
   public static final String PROP_EMPTY_OPTION = "emptyOption";
@@ -95,7 +91,6 @@ public class Config implements Cloneable, Serializable {
   private boolean _unnamedSection;
   private int _maxResolveDepth;
 
-  @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("SING_SINGLETON_HAS_NONPRIVATE_CONSTRUCTOR")
   public Config() {
     reset();
   }
